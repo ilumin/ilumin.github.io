@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bundle install
+# bundle install
 
 CONFIG_FILE=_config.yml
 
