@@ -1,15 +1,7 @@
 ---
-layout: about
-title: about
-permalink: /about
-# subtitle: Bangkok, Thailand
-
-profile:
-  align: right
-  image: ilumin-avatar.jpg
-  image_circular: true # crops the image to make it circular
-  more_info: >
-    Code drunk, debug sober.
+layout: page
+title: home
+permalink: /
 
 news: false # includes a list of news items
 selected_papers: false # includes a list of papers marked as "selected={true}"
