@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://ilumin.github.io/sitemap.xml
