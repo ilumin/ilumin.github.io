@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /about
-# subtitle: Bangkok, Thailand
+subtitle: Bangkok, Thailand
 
 profile:
   align: right
