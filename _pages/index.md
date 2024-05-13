@@ -15,8 +15,8 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
 ---
 
-I'm a Bangkok-based Software Engineer with a passion for problem-solving.
+I'm a Bangkok-based software engineer who enjoys problem solving.
 
-I craft clean and efficient software solution. I love driving into a good book, whether it's a captivating historical account or a thought-provoking short novel.
+I create clean, efficient software solutions. I enjoy getting into a good book, whether it's a fascinating historical account or a thought-provoking short novel.
 
-Beyond the technical aspects of software development, I'm fascinated by the art of turning requirements and business flows into elegant solutions. I find immense satisfaction in analyzing problems, understanding their core, and then crafting clear and effective software responses.
+Aside from the technical parts of software development, I'm fascinated by the process of transforming requirements and business activities into elegant solutions. I get a lot of satisfaction from examining problems, understanding their underlying causes, and then developing clear and effective software solutions.

@@ -4,7 +4,7 @@ title: Accidental Complexity คืออะไร
 date: 2024-05-13
 description: ความซับซ้อนโดยอุบัติเหตุงั้นเหรอ 🤔
 tags: ddd
-categories: solution architecture
+categories: solution-architecture
 # featured: true
 ---
 
