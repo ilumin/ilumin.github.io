@@ -1,7 +1,7 @@
 ---
 title: Rust str and String
 layout: post
-date: 2024-05-29
+date: 2024-05-30
 description: What's the difference between str and String
 tags: rust
 categories: etc
