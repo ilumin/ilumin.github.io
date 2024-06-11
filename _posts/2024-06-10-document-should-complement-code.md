@@ -1,12 +1,10 @@
 ---
 title: Document should complement code
 layout: post
-date: 2024-05-31
+date: 2024-06-10
 description: What does it mean "document should complement code"?
 tags: ddd
 ---
-
-# "Document should complement code" คืออะไร?
 
 "Document should complement code" หมายความว่า document ควรจะช่วยส่งเสริมให้เราเข้าใจ code ได้ง่าย
 
