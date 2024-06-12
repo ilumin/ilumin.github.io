@@ -34,7 +34,7 @@ So, I just have to change the url into SSH
 ```dot
 [submodule "common"]
   path = common
-  urk = git@githost/project-repo.git
+  urk = ../project-repo.git
 ```
 
 Then run
@@ -46,4 +46,4 @@ git submodule update
 # clone submodule into common/
 ```
 
-No more username and password 🤣
+Now Git submodule will clone with your current access or in my case clone without asking for username and password.
