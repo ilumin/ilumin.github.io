@@ -1,4 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en, th"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://ilumin.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://ilumin.github.io/" rel="alternate" type="text/html" hreflang="en, th"/><updated>2024-06-24T04:52:56+00:00</updated><id>https://ilumin.github.io/feed.xml</id><title type="html">Hi, I’m Lumin. 🙇‍♂️</title><subtitle>A simple blog for Lumin. </subtitle><entry><title type="html">The ? Operator in Rust</title><link href="https://ilumin.github.io/blog/2024/question-operator-in-rust/" rel="alternate" type="text/html" title="The ? Operator in Rust"/><published>2024-06-24T00:00:00+00:00</published><updated>2024-06-24T00:00:00+00:00</updated><id>https://ilumin.github.io/blog/2024/question-operator-in-rust</id><content type="html" xml:base="https://ilumin.github.io/blog/2024/question-operator-in-rust/"><![CDATA[<p>เวลาที่อ่าน code ของ Rust เรามักจะเจอ <code class="language-plaintext highlighter-rouge">?</code> ต่อท้ายฟังก์ชันบ่อยๆ เช่น</p> <div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Result</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span> <span class="p">{</span>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en, th"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://ilumin.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://ilumin.github.io/" rel="alternate" type="text/html" hreflang="en, th"/><updated>2024-07-03T15:41:58+00:00</updated><id>https://ilumin.github.io/feed.xml</id><title type="html">Hi, I’m Lumin. 🙇‍♂️</title><subtitle>A simple blog for Lumin. </subtitle><entry><title type="html">Set Path Alias for NestJS and Jest</title><link href="https://ilumin.github.io/blog/2024/nest-jest-path-alias/" rel="alternate" type="text/html" title="Set Path Alias for NestJS and Jest"/><published>2024-07-03T00:00:00+00:00</published><updated>2024-07-03T00:00:00+00:00</updated><id>https://ilumin.github.io/blog/2024/nest-jest-path-alias</id><content type="html" xml:base="https://ilumin.github.io/blog/2024/nest-jest-path-alias/"><![CDATA[<h2 id="the-problem">The Problem</h2> <p>NestJS didn’t configure path aliases by default. When we create a unit test that might need to import another file, we’ll have to import with a weird long path, e.g., <code class="language-plaintext highlighter-rouge">../../services</code>.</p> <p>I’m a lazy bastard; I just want to do something easy.</p> <h2 id="the-solution">The Solution</h2> <p>First, add <code class="language-plaintext highlighter-rouge">paths</code> inside ‘compilerOptions’ to set the TypeScript path alias at <code class="language-plaintext highlighter-rouge">tsconfig.json</code>.</p> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"compilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="err">tsconfig's</span><span class="w"> </span><span class="err">stuff</span><span class="w">
+    </span><span class="nl">"paths"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"@@/*"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"src/*"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <p>This configuration means that TS will understand that <code class="language-plaintext highlighter-rouge">import { services } from '@@/services'</code> is the same as <code class="language-plaintext highlighter-rouge">import { services } from 'src/services'</code>.</p> <p>Cool! However, there are still some issues with the test.</p> <p>Second, let’s configure Jest in <code class="language-plaintext highlighter-rouge">package.json</code> by adding <code class="language-plaintext highlighter-rouge">moduleNameMapper</code> inside ‘jest’.</p> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="err">//</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="err">package.json's</span><span class="w"> </span><span class="err">stuff</span><span class="w">
+  </span><span class="nl">"jest"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="err">jest's</span><span class="w"> </span><span class="err">stuff</span><span class="w">
+    </span><span class="nl">"rootDir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"src"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"moduleNameMapper"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"@@/(.*)$"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;rootDir&gt;/$1"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <p>This configuration means that Jest will understand that <code class="language-plaintext highlighter-rouge">import { services } from '@@/services'</code> is the same as <code class="language-plaintext highlighter-rouge">import { services } from 'src/services'</code>.</p> <p>Now, we can use path aliases in NestJS and Jest instead of using a full, weird, long path.</p>]]></content><author><name></name></author><category term="nest,"/><category term="jest"/><summary type="html"><![CDATA[Always forgot how to do it]]></summary></entry><entry><title type="html">The ? Operator in Rust</title><link href="https://ilumin.github.io/blog/2024/question-operator-in-rust/" rel="alternate" type="text/html" title="The ? Operator in Rust"/><published>2024-06-24T00:00:00+00:00</published><updated>2024-06-24T00:00:00+00:00</updated><id>https://ilumin.github.io/blog/2024/question-operator-in-rust</id><content type="html" xml:base="https://ilumin.github.io/blog/2024/question-operator-in-rust/"><![CDATA[<p>เวลาที่อ่าน code ของ Rust เรามักจะเจอ <code class="language-plaintext highlighter-rouge">?</code> ต่อท้ายฟังก์ชันบ่อยๆ เช่น</p> <div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Result</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span> <span class="p">{</span>
     <span class="k">let</span> <span class="n">contents</span> <span class="o">=</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fs</span><span class="p">::</span><span class="nf">read_to_string</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="o">?</span><span class="p">;</span> <span class="c1">// ? used here</span>
     <span class="nf">Ok</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
 <span class="p">}</span>
@@ -90,88 +108,4 @@
 </code></pre></div></div> <ul> <li>โดยปกติตัวแปรของ Rust เป็น immutable หรือ ไม่ยอมให้เปลี่ยนแปลงข้อมูล</li> <li>เวลาที่เราต้องการสร้างตัวแปรที่ต้องการเปลี่ยนแปลงข้อมูลได้ เราต้องเพิ่ม <code class="language-plaintext highlighter-rouge">mut</code> ไป</li> </ul> <div class="language-rs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">stdin</span><span class="p">()</span>
     <span class="nf">.read_line</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">your_name</span><span class="p">)</span>
     <span class="nf">.expect</span><span class="p">(</span><span class="s">"Failed to read line"</span><span class="p">);</span>
-</code></pre></div></div> <ul> <li>ตรงนี้น่าจะเดาได้ <code class="language-plaintext highlighter-rouge">read_line()</code> คือฟังก์ชั่นที่ทำหน้าที่รับ input มาเก็บลงตัวแปร</li> <li>การเปลี่ยนแปลงค่าตัวแปร mutable ใน Rust จริงๆเราสามารถทำแบบนี้ได้เลย <code class="language-plaintext highlighter-rouge">your_name = xxx</code> แต่การเอาไปใช้ใน function จะต้องใช้ borrow อธิบายง่ายๆคือต้องเอา reference ไปใช้งาน <ul> <li>ซึ่งถ้าเป็น mutable จะต้องเขียนแบบนี้ <code class="language-plaintext highlighter-rouge">function(&amp;mut your_name)</code></li> <li>ในกรณีที่จะ read ก็จะต้องใช้ borrow ด้วย ซึ่งจะใช้แบบนี้ <code class="language-plaintext highlighter-rouge">function(&amp;your_name)</code></li> </ul> </li> </ul>]]></content><author><name></name></author><category term="etc"/><category term="rust"/><summary type="html"><![CDATA[Assume that this is my first time with Rust]]></summary></entry><entry><title type="html">ARC114 - Analyze Speech &amp;amp; Language with Google APIs</title><link href="https://ilumin.github.io/blog/2024/ARC114/" rel="alternate" type="text/html" title="ARC114 - Analyze Speech &amp;amp; Language with Google APIs"/><published>2024-05-27T00:00:00+00:00</published><updated>2024-05-27T00:00:00+00:00</updated><id>https://ilumin.github.io/blog/2024/ARC114</id><content type="html" xml:base="https://ilumin.github.io/blog/2024/ARC114/"><![CDATA[<h1 id="arc114-analyze-speech--language-with-google-apis-challenge-lab">ARC114: Analyze Speech &amp; Language with Google APIs: Challenge Lab</h1> <h2 id="setup">Setup</h2> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PROJECT_ID</span><span class="o">=</span><span class="si">$(</span>gcloud config get-value core/project<span class="si">)</span>
-</code></pre></div></div> <h2 id="task-1-create-an-api-key">Task 1: Create an API key</h2> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gcloud alpha services api-keys create <span class="nt">--display-name</span><span class="o">=</span><span class="s2">"lumin"</span>
-<span class="nb">export </span><span class="nv">KEY_NAME</span><span class="o">=</span><span class="si">$(</span>gcloud alpha services api-keys list <span class="nt">--format</span><span class="o">=</span><span class="s2">"value(name)"</span> <span class="nt">--filter</span> <span class="s2">"displayName=lumin"</span><span class="si">)</span>
-<span class="nb">export </span><span class="nv">API_KEY</span><span class="o">=</span><span class="si">$(</span>gcloud alpha services api-keys get-key-string <span class="nv">$KEY_NAME</span> <span class="nt">--format</span><span class="o">=</span><span class="s2">"value(keyString)"</span><span class="si">)</span>
-</code></pre></div></div> <h2 id="task-2-make-an-entity-analysis-request-and-call-the-natural-language-api">Task 2: Make an entity analysis request and call the Natural Language API</h2> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> <span class="o">&gt;</span> nl_request.json <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
-{
-  "document":{
-    "type":"PLAIN_TEXT",
-    "content":"With approximately 8.2 million people residing in Boston, the capital city of Massachusetts is one of the largest in the United States."
-  },
-  "encodingType":"UTF8"
-}
-</span><span class="no">EOF
-
-</span>curl <span class="s2">"https://language.googleapis.com/v1/documents:analyzeEntities?key=</span><span class="k">${</span><span class="nv">API_KEY</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-  <span class="nt">-s</span> <span class="nt">-X</span> POST <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">--data-binary</span> @nl_request.json <span class="o">&gt;</span> nl_response.json
-</code></pre></div></div> <h2 id="task-3-create-a-speech-analysis-request-and-call-the-speech-api">Task 3. Create a speech analysis request and call the Speech API</h2> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> <span class="o">&gt;</span> speech_request.json <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
-{
-  "config": {
-      "encoding":"FLAC",
-      "languageCode": "en-US"
-  },
-  "audio": {
-      "uri":"gs://cloud-samples-tests/speech/brooklyn.flac"
-  }
-}
-</span><span class="no">EOF
-
-</span>curl <span class="nt">-s</span> <span class="nt">-X</span> POST <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">--data-binary</span> @speech_request.json <span class="se">\</span>
-<span class="s2">"https://speech.googleapis.com/v1/speech:recognize?key=</span><span class="k">${</span><span class="nv">API_KEY</span><span class="k">}</span><span class="s2">"</span> <span class="o">&gt;</span> speech_response.json
-</code></pre></div></div> <h2 id="task-4-analyze-sentiment-with-the-natural-language-api">Task 4. Analyze sentiment with the Natural Language API</h2> <p>Update <code class="language-plaintext highlighter-rouge">def analyze()</code></p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> <span class="o">&gt;</span> sentiment_analysis.py <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
-import argparse
-
-from google.cloud import language_v1
-
-def print_result(annotations):
-    score = annotations.document_sentiment.score
-    magnitude = annotations.document_sentiment.magnitude
-
-    for index, sentence in enumerate(annotations.sentences):
-        sentence_sentiment = sentence.sentiment.score
-        print(
-            "Sentence {} has a sentiment score of {}".format(index, sentence_sentiment)
-        )
-
-    print(
-        "Overall Sentiment: score of {} with magnitude of {}".format(score, magnitude)
-    )
-    return 0
-
-def analyze(movie_review_filename):
-    """Run a sentiment analysis request on text within a passed filename."""
-    client = language_v1.LanguageServiceClient()
-
-    with open(movie_review_filename) as review_file:
-        content = review_file.read()
-
-    document = language_v1.Document(
-        content=content, type_=language_v1.Document.Type.PLAIN_TEXT
-    )
-    annotations = client.analyze_sentiment(request={"document": document})
-
-    print_result(annotations)
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
-    )
-    parser.add_argument(
-        "movie_review_filename",
-        help="The filename of the movie review you'd like to analyze.",
-    )
-    args = parser.parse_args()
-
-    analyze(args.movie_review_filename)
-</span><span class="no">EOF
-</span></code></pre></div></div> <p>Then</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># copy file</span>
-gsutil <span class="nb">cp </span>gs://cloud-samples-tests/natural-language/sentiment-samples.tgz <span class="nb">.</span>
-<span class="nb">gunzip </span>sentiment-samples.tgz
-<span class="nb">tar</span> <span class="nt">-xvf</span> sentiment-samples.tar
-
-<span class="c"># Run</span>
-python3 sentiment_analysis.py reviews/bladerunner-pos.txt
-</code></pre></div></div>]]></content><author><name></name></author><category term="gcp-labs"/><category term="gcp,"/><category term="chaiyo2024"/><summary type="html"><![CDATA[ARC114]]></summary></entry></feed>
+</code></pre></div></div> <ul> <li>ตรงนี้น่าจะเดาได้ <code class="language-plaintext highlighter-rouge">read_line()</code> คือฟังก์ชั่นที่ทำหน้าที่รับ input มาเก็บลงตัวแปร</li> <li>การเปลี่ยนแปลงค่าตัวแปร mutable ใน Rust จริงๆเราสามารถทำแบบนี้ได้เลย <code class="language-plaintext highlighter-rouge">your_name = xxx</code> แต่การเอาไปใช้ใน function จะต้องใช้ borrow อธิบายง่ายๆคือต้องเอา reference ไปใช้งาน <ul> <li>ซึ่งถ้าเป็น mutable จะต้องเขียนแบบนี้ <code class="language-plaintext highlighter-rouge">function(&amp;mut your_name)</code></li> <li>ในกรณีที่จะ read ก็จะต้องใช้ borrow ด้วย ซึ่งจะใช้แบบนี้ <code class="language-plaintext highlighter-rouge">function(&amp;your_name)</code></li> </ul> </li> </ul>]]></content><author><name></name></author><category term="etc"/><category term="rust"/><summary type="html"><![CDATA[Assume that this is my first time with Rust]]></summary></entry></feed>
